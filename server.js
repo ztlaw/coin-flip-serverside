@@ -2,6 +2,10 @@ const http = require('http')
 const bodyParser = require('body-parser')
 const express = require('express')
 const app = express()
+const {readFileSync} = require('fs')
+
+const coinFront = readFileSync('images/coin-front.png')
+const coinBack = readFileSync('images/coin-back.png')
 
 app.use(bodyParser.urlencoded({extended: true}))
 
@@ -18,13 +22,33 @@ app.get('/', (req, res) => {
 })
 
 app.get('/api', (req, res) => {
+    let result;
+    let image;
 //what goes in here? the results to the coin flip 
-const coinFlip = Math.ceil(Math.random() * 2)
-if(coinFlip === 1){
-    res.json({'solution': 'HEADS'})
-}  else if(coinFlip === 2){
-    res.json({'solution': 'TAILS'})
+function coinFlip(){
+    const flip = Math.ceil(Math.random() * 2)
+    if (flip == 1){
+        result = 'Heads';
+        image = coinBack
+        console.log(result)
+    }
+    else if (flip == 2){
+        result = 'Tails';
+        image = coinFront
+        console.log(result)
+    }
 }
+coinFlip()
+const objToJson = {result}
+res.send(objToJson)
 
-console.log(coinFlip)
+
+
+
+
+
 })
+
+// app.put('/api', (req, res) => {
+//     console.log(req.body)
+// })
