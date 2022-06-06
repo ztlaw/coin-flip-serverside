@@ -4,9 +4,6 @@ const express = require('express')
 const app = express()
 const {readFileSync} = require('fs')
 
-const coinFront = readFileSync('images/coin-front.png')
-const coinBack = readFileSync('images/coin-back.png')
-
 app.use(bodyParser.urlencoded({extended: true}))
 
 app.use(express.static('public')) // intitializing Express -- which allows us to update the HTML elements with JS
@@ -22,30 +19,29 @@ app.get('/', (req, res) => {
 })
 
 app.get('/api', (req, res) => {
-    let result;
-    let image;
-//what goes in here? the results to the coin flip 
 function coinFlip(){
     const flip = Math.ceil(Math.random() * 2)
     if (flip == 1){
-        result = 'Heads';
-        image = coinBack
-        console.log(result)
+        results = {
+            result: 'Heads',
+            side: flip, 
+          //  img: how can i add an image that gets served with to the client? 
+
+        }
+        console.log(results)
     }
     else if (flip == 2){
-        result = 'Tails';
-        image = coinFront
-        console.log(result)
+        results = {
+            result: 'Tails',
+            side: flip, 
+          //  img: how can i add an image that gets served with to the client? 
+
+        }
+        console.log(results)
     }
 }
 coinFlip()
-const objToJson = {result}
-res.send(objToJson)
-
-
-
-
-
+res.json(results)
 
 })
 
