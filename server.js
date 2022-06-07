@@ -1,23 +1,21 @@
 
-
+const cors = require('cors')
 const http = require('http')
 const bodyParser = require('body-parser')
 const express = require('express')
 const app = express()
 const {readFileSync} = require('fs')
+const PORT = 8000
 
 const headsImage = readFileSync('images/coin-front.png');
 const tailsImage = readFileSync('images/coin-back.png');
-
+app.use(cors())
 app.use(bodyParser.urlencoded({extended: true}))
 
 app.use(express.static('public')) // intitializing Express -- which allows us to update the HTML elements with JS
 app.use(bodyParser.json())
 
 
-app.listen(3000, _ => {
-    console.log('Listening on 3000...')
-} )
 
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/index.html')
@@ -50,7 +48,6 @@ res.json(results)
 
 
 })
-
-// app.put('/api', (req, res) => {
-//     console.log(req.body)
-// })
+app.listen(process.env.PORT || PORT, _ => {
+    console.log('Network connection: successful')
+} )
