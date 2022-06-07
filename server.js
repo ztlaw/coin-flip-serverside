@@ -18,7 +18,7 @@ app.get('/', (req, res) => {
     res.sendFile(__dirname + '/index.html')
 })
 
-app.get('/api', (req, res) => {
+app.get('/two', (req, res) => {
 function coinFlip(){
     const flip = Math.ceil(Math.random() * 2)
     if (flip == 1){
