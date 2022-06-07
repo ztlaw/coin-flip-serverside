@@ -2,7 +2,7 @@ alert('working')
 
 const button = document.querySelector('#button')
 const h1 = document.querySelector('h1')
-const img = document.getElementById('coin-img')
+const img = document.querySelector('.coin')
 
 async function makeRequest(){
     const res = await fetch('/two')

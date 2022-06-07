@@ -1,8 +1,13 @@
+
+
 const http = require('http')
 const bodyParser = require('body-parser')
 const express = require('express')
 const app = express()
 const {readFileSync} = require('fs')
+
+const headsImage = readFileSync('images/coin-front.png');
+const tailsImage = readFileSync('images/coin-back.png');
 
 app.use(bodyParser.urlencoded({extended: true}))
 
@@ -42,6 +47,7 @@ function coinFlip(){
 }
 coinFlip()
 res.json(results)
+
 
 })
 
